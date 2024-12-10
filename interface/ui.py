@@ -292,6 +292,21 @@ class GameWindow(QGraphicsView):
                 if pos == (capture_row, capture_col):
                     self.scene.removeItem(item)
                     self.score[self.player] += 1
+                    if self.playersRobot == "mitsubishi":
+                        if self.player == "red":
+
+                            self.manager.transmit("kawasaki", [capture_row, capture_col], [8, self.score["red"]])
+                            self.manager.receive("kawasaki")
+                        else:
+                            self.manager.transmit("mitsubishi", [capture_row, capture_col], [9, self.score["white"]])
+                            self.manager.receive("mitsubishi")
+                    else:
+                        if self.player == "red":
+                            self.manager.transmit("kawasaki", [capture_row, capture_col], [8, self.score["red"]])
+                            self.manager.receive("kawasaki")
+                        else:
+                            self.manager.transmit("mitsubishi", [capture_row, capture_col], [9, self.score["white"]])
+                            self.manager.receive("mitsubishi")
 
     def make_move(self, src_x, src_y, dest_x, dest_y):
         if abs(src_y - dest_y) == 2:
